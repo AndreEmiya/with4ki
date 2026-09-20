@@ -215,18 +215,15 @@
         ];
 
         function getNewFact() {
+            const factElement = document.getElementById("factText");
+            const randomIndex = Math.floor(Math.random() * kuraFacts.length);
             if(factElement.innerText != null){
-                const factElement = document.getElementById("factText");
-                const randomIndex = Math.floor(Math.random() * kuraFacts.length);
                 while(factElement.innerText == kuraFacts[randomIndex]){
-                    const factElement = document.getElementById("factText");
-                    const randomIndex = Math.floor(Math.random() * kuraFacts.length);
+                    randomIndex = Math.floor(Math.random() * kuraFacts.length);
                 }
                 factElement.innerText = kuraFacts[randomIndex]; 
             }
             else{
-                const factElement = document.getElementById("factText");
-                const randomIndex = Math.floor(Math.random() * kuraFacts.length);
                 factElement.innerText = kuraFacts[randomIndex]; 
             }
         }
