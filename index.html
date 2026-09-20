@@ -26,7 +26,9 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 75%);
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -35,9 +37,39 @@
             padding: 20px;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            inset: -100vh 0 0;
+            height: 200vh;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.58), rgba(15, 23, 42, 0.72)), url("background.jpg");
+            background-size: 100% 50%;
+            background-position: center top;
+            background-repeat: repeat-y;
+            animation: background-drift 25s linear infinite;
+        }
+
+        @keyframes background-drift {
+            from {
+                transform: translateY(100vh);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                animation: none;
+            }
+        }
+
         .container {
             width: 100%;
             max-width: 480px;
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,10 +89,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: white;
+            overflow: hidden;
             margin: 0 auto 16px;
             box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .avatar i {
+            font-size: 3rem;
+            color: white;
+            display: none;
         }
 
         h1 {
@@ -71,7 +116,7 @@
         }
 
         .tagline {
-            color: var(--text-sub);
+            color: white;
             font-size: 0.95rem;
         }
 
@@ -89,7 +134,7 @@
         }
 
         .fact-card::before {
-            content: "🐾 Kura Fact";
+            content: "Kura Fact";
             display: inline-block;
             font-size: 0.75rem;
             font-weight: 700;
@@ -176,10 +221,11 @@
         <!-- Header Section -->
         <div class="header">
             <div class="avatar">
-                <i class="fa-solid fa-user-ninja"></i>
+                <img id="avatarImage" src="avatar.jpg" alt="with4ki avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <i id="avatarFallback" class="fa-solid fa-user-ninja"></i>
             </div>
             <h1>with4ki</h1>
-            <p class="tagline">Welcome to my page • Proud owner of Kura 🐱</p>
+            <p class="tagline">Welcome to my page • Proud owner of Kura</p>
         </div>
 
         <!-- Cat Fact Card -->
@@ -196,6 +242,9 @@
             <a href="https://www.tiktok.com/@with4ki" target="_blank" class="link-btn">
                 <i class="fa-brands fa-tiktok"></i> TikTok
             </a>
+            <a href="https://throne.com/with4ki" target="_blank" class="link-btn">
+                <i class="fa-solid fa-crown"></i> Throne
+            </a>
         </div>
 
         <footer>
@@ -206,12 +255,13 @@
     <script>
         // List of facts about Kura
         const kuraFacts = [
-            "Kura's favorite spot to sleep is right on top of warm electronics.",
-            "Kura demands breakfast at precisely the same time every morning.",
-            "Kura becomes extra playful right around 2:00 AM.",
-            "Kura's owner with4ki makes sure Kura has the best treats.",
-            "Kura is officially the ruler of the house.",
-            "Kura loves bird watching through the window."
+            "Kura will shut down your computer if you have the button on the top of the case.",
+            "Kura demands breakfast at any and all times of the day.",
+            "Kura needs 16 hours of beauty sleep each day or else she gets grumpy.",
+            "Kura becomes extra playful right around 3:00 AM, which makes for amazing sleep schedules.",
+            "Kura likes putting on leg forward when she loafs, that's called the chicken leg pose.",
+            "Kura demands ham everytime you cook, regardless of her hunger level.",
+            "Kura would lunge at birds if it wasn't for the evil window."
         ];
 
         function getNewFact() {
@@ -223,6 +273,11 @@
                 }
             }
             factElement.innerText = kuraFacts[randomIndex];
+        }
+
+        const avatarImage = document.getElementById("avatarImage");
+        if (avatarImage) {
+            avatarImage.src = `avatar.jpg?v=${Date.now()}`;
         }
 
         // Load a initial fact on start
