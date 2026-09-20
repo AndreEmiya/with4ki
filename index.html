@@ -190,17 +190,11 @@
 
         <!-- Social Links -->
         <div class="links">
-            <a href="https://instagram.com" target="_blank" class="link-btn">
+            <a href="https://www.instagram.com/with4ki" target="_blank" class="link-btn">
                 <i class="fa-brands fa-instagram"></i> Instagram
             </a>
-            <a href="https://twitter.com" target="_blank" class="link-btn">
-                <i class="fa-brands fa-x-twitter"></i> X / Twitter
-            </a>
-            <a href="https://tiktok.com" target="_blank" class="link-btn">
+            <a href="https://www.tiktok.com/@with4ki" target="_blank" class="link-btn">
                 <i class="fa-brands fa-tiktok"></i> TikTok
-            </a>
-            <a href="https://twitch.tv" target="_blank" class="link-btn">
-                <i class="fa-brands fa-twitch"></i> Twitch
             </a>
         </div>
 
@@ -221,9 +215,20 @@
         ];
 
         function getNewFact() {
-            const factElement = document.getElementById("factText");
-            const randomIndex = Math.floor(Math.random() * kuraFacts.length);
-            factElement.innerText = kuraFacts[randomIndex];
+            if(factElement.innerText != null){
+                const factElement = document.getElementById("factText");
+                const randomIndex = Math.floor(Math.random() * kuraFacts.length);
+                while(factElement.innerText == kuraFacts[randomIndex]){
+                    const factElement = document.getElementById("factText");
+                    const randomIndex = Math.floor(Math.random() * kuraFacts.length);
+                }
+                factElement.innerText = kuraFacts[randomIndex]; 
+            }
+            else{
+                const factElement = document.getElementById("factText");
+                const randomIndex = Math.floor(Math.random() * kuraFacts.length);
+                factElement.innerText = kuraFacts[randomIndex]; 
+            }
         }
 
         // Load a initial fact on start
