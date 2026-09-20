@@ -216,16 +216,13 @@
 
         function getNewFact() {
             const factElement = document.getElementById("factText");
-            const randomIndex = Math.floor(Math.random() * kuraFacts.length);
-            if(factElement.innerText != null){
-                while(factElement.innerText == kuraFacts[randomIndex]){
+            let randomIndex = Math.floor(Math.random() * kuraFacts.length);
+            if (factElement && factElement.innerText) {
+                while (factElement.innerText === kuraFacts[randomIndex]) {
                     randomIndex = Math.floor(Math.random() * kuraFacts.length);
                 }
-                factElement.innerText = kuraFacts[randomIndex]; 
             }
-            else{
-                factElement.innerText = kuraFacts[randomIndex]; 
-            }
+            factElement.innerText = kuraFacts[randomIndex];
         }
 
         // Load a initial fact on start
