@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>with4ki & Kura</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 75%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* Header / Avatar */
+        .header {
+            text-align: center;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 16px;
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .tagline {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
+        /* Cat Fact Card */
+        .fact-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .fact-card::before {
+            content: "🐾 Kura Fact";
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .fact-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-fact {
+            margin-top: 12px;
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-fact:hover {
+            background: var(--accent-color);
+            color: #0f172a;
+        }
+
+        /* Social Links */
+        .links {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .link-btn i {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="avatar">
+                <i class="fa-solid fa-user-ninja"></i>
+            </div>
+            <h1>with4ki</h1>
+            <p class="tagline">Welcome to my page • Proud owner of Kura 🐱</p>
+        </div>
+
+        <!-- Cat Fact Card -->
+        <div class="fact-card">
+            <div class="fact-text" id="factText">Loading Kura fact...</div>
+            <button class="btn-fact" onclick="getNewFact()">New Fact <i class="fa-solid fa-rotate-right"></i></button>
+        </div>
+
+        <!-- Social Links -->
+        <div class="links">
+            <a href="https://instagram.com" target="_blank" class="link-btn">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            <a href="https://twitter.com" target="_blank" class="link-btn">
+                <i class="fa-brands fa-x-twitter"></i> X / Twitter
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="link-btn">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://twitch.tv" target="_blank" class="link-btn">
+                <i class="fa-brands fa-twitch"></i> Twitch
+            </a>
+        </div>
+
+        <footer>
+            © with4ki & Kura
+        </footer>
+    </div>
+
+    <script>
+        // List of facts about Kura
+        const kuraFacts = [
+            "Kura's favorite spot to sleep is right on top of warm electronics.",
+            "Kura demands breakfast at precisely the same time every morning.",
+            "Kura becomes extra playful right around 2:00 AM.",
+            "Kura's owner with4ki makes sure Kura has the best treats.",
+            "Kura is officially the ruler of the house.",
+            "Kura loves bird watching through the window."
+        ];
+
+        function getNewFact() {
+            const factElement = document.getElementById("factText");
+            const randomIndex = Math.floor(Math.random() * kuraFacts.length);
+            factElement.innerText = kuraFacts[randomIndex];
+        }
+
+        // Load a initial fact on start
+        window.onload = getNewFact;
+    </script>
+</body>
+</html>
